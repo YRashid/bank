@@ -1,5 +1,8 @@
 package ru.rashid.bank.controller;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +23,14 @@ public class AccountController {
     private final AccountValidationService validationService;
 
     @GetMapping("{id}")
-    public AccountOutputModel getAccountById(@PathVariable("id") Long id) {
+    public AccountOutputModel getAccountById(@Valid @Min(value = 1, message = "Should be positive")
+                                             @PathVariable("id") Long id) {
         var account = accountService.getAccountById(id);
         return new AccountOutputModel(account);
     }
 
     @PostMapping
-    public AccountOutputModel createAccount(@RequestBody AccountInputModel input) {
+    public AccountOutputModel createAccount(@Valid @RequestBody AccountInputModel input) {
         validationService.validateNewAccountData(input);
         var account = accountService.createAccount(input);
         return new AccountOutputModel(account);

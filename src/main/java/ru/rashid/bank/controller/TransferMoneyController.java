@@ -1,5 +1,7 @@
 package ru.rashid.bank.controller;
 
+import javax.validation.Valid;
+
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +20,7 @@ public class TransferMoneyController {
     private final TransferMoneyValidationService validationService;
 
     @PostMapping
-    public TransferMoneyOutputModel transferMoney(@RequestBody TransferInputModel input) {
+    public TransferMoneyOutputModel transferMoney(@Valid @RequestBody TransferInputModel input) {
         validationService.validateTransferMoney(input);
         var transferMoneyAccounts = transferMoneyService.transfer(input);
         return new TransferMoneyOutputModel(transferMoneyAccounts);
