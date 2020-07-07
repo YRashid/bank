@@ -17,8 +17,12 @@ public class TestAccountHelper {
 
     public Account createAccount() {
         Account account = new Account();
-        account.setId(RandomUtils.nextLong(1000L, Long.MAX_VALUE));
+        account.setId(getRandomId());
         account.setBalance(DEFAULT_BALANCE);
         return accountRepository.save(account);
+    }
+
+    public long getRandomId() {
+        return RandomUtils.nextLong(10000L, Long.MAX_VALUE);
     }
 }

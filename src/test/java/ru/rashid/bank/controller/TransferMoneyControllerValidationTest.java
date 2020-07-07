@@ -2,7 +2,6 @@ package ru.rashid.bank.controller;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,10 +20,10 @@ import static ru.rashid.bank.helper.TestAccountHelper.DEFAULT_BALANCE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TransferMoneyControllerValidationTest extends TransferMoneyControllerTestBase {
+public class TransferMoneyControllerValidationTest extends ControllerTestBase {
 
     @Test
-    public void insufficientFunds() throws Exception {
+    public void insufficientFunds() {
         Account from = testAccountHelper.createAccount();
         Account to = testAccountHelper.createAccount();
 
@@ -34,16 +33,16 @@ public class TransferMoneyControllerValidationTest extends TransferMoneyControll
     }
 
     @Test
-    public void accountIdNotFound() throws Exception {
+    public void accountIdNotFound() {
         Account from = testAccountHelper.createAccount();
-        long nonexistentId = RandomUtils.nextLong(1000L, Long.MAX_VALUE);
+        long nonexistentId = testAccountHelper.getRandomId();
 
         var input = new TransferInputModel(from.getId(), nonexistentId, BigDecimal.ONE);
         callAndCheckError(input, HttpStatus.NOT_FOUND, ACCOUNT_NOT_FOUND.name());
     }
 
     @Test
-    public void accountIdCannotBeNull() throws Exception {
+    public void accountIdCannotBeNull() {
         Account from = testAccountHelper.createAccount();
 
         var input = new TransferInputModel(from.getId(), null, BigDecimal.ONE);
@@ -51,7 +50,7 @@ public class TransferMoneyControllerValidationTest extends TransferMoneyControll
     }
 
     @Test
-    public void transferringToYourselfIsForbidden() throws Exception {
+    public void transferringToYourselfIsForbidden() {
         Account from = testAccountHelper.createAccount();
 
         var input = new TransferInputModel(from.getId(), from.getId(), BigDecimal.ONE);
@@ -59,7 +58,7 @@ public class TransferMoneyControllerValidationTest extends TransferMoneyControll
     }
 
     @Test
-    public void amountMustBePositive() throws Exception {
+    public void amountMustBePositive() {
         Account from = testAccountHelper.createAccount();
         Account to = testAccountHelper.createAccount();
 
@@ -68,7 +67,7 @@ public class TransferMoneyControllerValidationTest extends TransferMoneyControll
     }
 
     @Test
-    public void zeroAmountIsForbidden() throws Exception {
+    public void zeroAmountIsForbidden() {
         Account from = testAccountHelper.createAccount();
         Account to = testAccountHelper.createAccount();
 
@@ -78,7 +77,7 @@ public class TransferMoneyControllerValidationTest extends TransferMoneyControll
 
     private void callAndCheckError(TransferInputModel input,
                                    HttpStatus httpStatus,
-                                   String errorCode) throws Exception {
+                                   String errorCode) {
 
         ErrorDescription errorDescription = callTransferMoneyNegative(input, httpStatus);
         assertEquals(errorCode, errorDescription.getCode());

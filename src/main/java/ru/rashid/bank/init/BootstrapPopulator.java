@@ -23,7 +23,7 @@ public class BootstrapPopulator {
 
     private void createAccounts() {
         List<Account> accounts = new ArrayList<>();
-        for (long i = 0; i < 1000; i++) {
+        for (long i = 1; i <= 1000; i++) {
             Account account = new Account();
             account.setId(i);
             account.setBalance(BigDecimal.valueOf(1000));

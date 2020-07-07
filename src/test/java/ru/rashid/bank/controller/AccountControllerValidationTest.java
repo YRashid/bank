@@ -2,7 +2,6 @@ package ru.rashid.bank.controller;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,10 +16,10 @@ import static ru.rashid.bank.exception.handler.HttpExceptionHandler.INPUT_PARAME
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AccountControllerValidationTest extends AccountControllerTestBase {
+public class AccountControllerValidationTest extends ControllerTestBase {
 
     @Test
-    public void accountAlreadyExists() throws Exception {
+    public void accountAlreadyExists() {
         Long existingId = testAccountHelper.createAccount().getId();
         BigDecimal balance = BigDecimal.ONE;
 
@@ -29,8 +28,8 @@ public class AccountControllerValidationTest extends AccountControllerTestBase {
     }
 
     @Test
-    public void balanceCannotBeNegative() throws Exception {
-        long id = RandomUtils.nextLong(1000L, Long.MAX_VALUE);
+    public void balanceCannotBeNegative() {
+        long id = testAccountHelper.getRandomId();
         BigDecimal balance = BigDecimal.valueOf(-1);
 
         var input = new AccountInputModel(id, balance);
@@ -40,7 +39,7 @@ public class AccountControllerValidationTest extends AccountControllerTestBase {
 
     private void callAndCheckError(AccountInputModel input,
                                    HttpStatus httpStatus,
-                                   String errorCode) throws Exception {
+                                   String errorCode) {
 
         ErrorDescription errorDescription = callCreateUserNegative(input, httpStatus);
         assertEquals(errorCode, errorDescription.getCode());

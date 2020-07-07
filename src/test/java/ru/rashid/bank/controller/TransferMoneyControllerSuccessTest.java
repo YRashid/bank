@@ -13,10 +13,10 @@ import static ru.rashid.bank.helper.TestAccountHelper.DEFAULT_BALANCE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TransferMoneyControllerSuccessTest extends TransferMoneyControllerTestBase {
+public class TransferMoneyControllerSuccessTest extends ControllerTestBase {
 
     @Test
-    public void simpleTransfer() throws Exception {
+    public void simpleTransfer() {
         Account from = testAccountHelper.createAccount();
         Account to = testAccountHelper.createAccount();
         BigDecimal amount = BigDecimal.ONE;
@@ -29,7 +29,7 @@ public class TransferMoneyControllerSuccessTest extends TransferMoneyControllerT
     }
 
     @Test
-    public void circleTransfer() throws Exception {
+    public void circleTransfer() {
         Account account1 = testAccountHelper.createAccount();
         Account account2 = testAccountHelper.createAccount();
         Account account3 = testAccountHelper.createAccount();
@@ -48,7 +48,7 @@ public class TransferMoneyControllerSuccessTest extends TransferMoneyControllerT
     }
 
     @Test
-    public void zeroBalanceAllowed() throws Exception {
+    public void zeroBalanceAllowed() {
         Account from = testAccountHelper.createAccount();
         Account to = testAccountHelper.createAccount();
         BigDecimal amount = DEFAULT_BALANCE;
