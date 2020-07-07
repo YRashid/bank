@@ -1,0 +1,15 @@
+package ru.rashid.bank.data.model.input;
+
+import java.math.BigDecimal;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AccountInputModel {
+    private Long id;
+    private BigDecimal balance;
+}
