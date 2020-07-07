@@ -11,8 +11,8 @@ import ru.rashid.bank.data.model.input.TransferInputModel;
 import ru.rashid.bank.data.repository.AccountRepository;
 import ru.rashid.bank.exception.AccountNotFoundException;
 import ru.rashid.bank.exception.BadRequestException;
+import ru.rashid.bank.exception.InsufficientFundsException;
 
-import static ru.rashid.bank.exception.ErrorMessageEnum.INSUFFICIENT_FUNDS;
 import static ru.rashid.bank.exception.ErrorMessageEnum.TRANSFERRING_TO_YOURSELF_IS_FORBIDDEN;
 
 @Service
@@ -34,7 +34,7 @@ public class TransferMoneyValidationService {
      */
     public void validateBalance(Account fromAccount, BigDecimal amount) {
         if (amount.compareTo(fromAccount.getBalance()) > 0) {
-            throw new BadRequestException(INSUFFICIENT_FUNDS);
+            throw new InsufficientFundsException(fromAccount.getBalance());
         }
     }
 

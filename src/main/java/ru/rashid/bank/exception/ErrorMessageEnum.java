@@ -1,7 +1,7 @@
 package ru.rashid.bank.exception;
 
 public enum ErrorMessageEnum {
-    INSUFFICIENT_FUNDS("Insufficient funds"),
+    INSUFFICIENT_FUNDS("Insufficient funds. 'From account' balance is %s"),
     ACCOUNT_ALREADY_EXISTS("Account with this id already exists"),
     ACCOUNT_NOT_FOUND("Account with id %s is not found"),
     TRANSFERRING_TO_YOURSELF_IS_FORBIDDEN("Transferring money to yourself is forbidden"),
