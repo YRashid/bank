@@ -21,7 +21,7 @@ import static ru.rashid.bank.helper.TestAccountHelper.DEFAULT_BALANCE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TransferMoneyControllerValidationTest extends TransferMoneyTestBase {
+public class TransferMoneyControllerValidationTest extends TransferMoneyControllerTestBase {
 
     @Test
     public void insufficientFunds() throws Exception {

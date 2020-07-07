@@ -13,7 +13,7 @@ import static ru.rashid.bank.helper.TestAccountHelper.DEFAULT_BALANCE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TransferMoneyControllerSuccessTest extends TransferMoneyTestBase {
+public class TransferMoneyControllerSuccessTest extends TransferMoneyControllerTestBase {
 
     @Test
     public void simpleTransfer() throws Exception {

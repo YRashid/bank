@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rashid.bank.data.entity.Account;
 import ru.rashid.bank.data.model.output.AccountOutputModel;
-import ru.rashid.bank.data.model.output.TransferMoneyOutputModel;
+import ru.rashid.bank.data.model.output.TransferOutputModel;
 import ru.rashid.bank.data.repository.AccountRepository;
 
 import static org.junit.Assert.assertEquals;
@@ -24,7 +24,7 @@ public class TestCheckBalanceHelper {
         checkActualBalance(toId, TestAccountHelper.DEFAULT_BALANCE.add(differenceFromDefault));
     }
 
-    public void checkResponseBalances(TransferMoneyOutputModel result, BigDecimal differenceFromDefault) {
+    public void checkResponseBalances(TransferOutputModel result, BigDecimal differenceFromDefault) {
         AccountOutputModel from = result.getFrom();
         AccountOutputModel to = result.getTo();
         checkResponseBalance(from, TestAccountHelper.DEFAULT_BALANCE.subtract(differenceFromDefault));

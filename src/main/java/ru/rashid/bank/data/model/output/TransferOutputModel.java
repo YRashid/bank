@@ -6,11 +6,11 @@ import ru.rashid.bank.data.model.TransferMoneyAccounts;
 
 @Data
 @NoArgsConstructor
-public class TransferMoneyOutputModel {
+public class TransferOutputModel {
     private AccountOutputModel from;
     private AccountOutputModel to;
 
-    public TransferMoneyOutputModel(TransferMoneyAccounts source) {
+    public TransferOutputModel(TransferMoneyAccounts source) {
         this.from = new AccountOutputModel(source.getFrom());
         this.to = new AccountOutputModel(source.getTo());
     }

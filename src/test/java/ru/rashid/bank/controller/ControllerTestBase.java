@@ -9,8 +9,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import ru.rashid.bank.data.model.input.TransferInputModel;
-import ru.rashid.bank.data.model.output.TransferMoneyOutputModel;
 import ru.rashid.bank.exception.handler.ErrorDescription;
 import ru.rashid.bank.helper.TestAccountHelper;
 import ru.rashid.bank.helper.TestCheckBalanceHelper;
@@ -18,8 +16,10 @@ import ru.rashid.bank.helper.TestCheckBalanceHelper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-abstract class TransferMoneyTestBase {
+abstract class ControllerTestBase<I, O> {
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private final Class<O> outputClass;
+    private final String path;
 
     @Autowired
     TestAccountHelper testAccountHelper;
@@ -29,22 +29,27 @@ abstract class TransferMoneyTestBase {
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
+    protected ControllerTestBase(Class<O> outputClass, String path) {
+        this.outputClass = outputClass;
+        this.path = path;
+    }
+
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    TransferMoneyOutputModel callTransferMoneyPositive(TransferInputModel input) throws Exception {
-        return callTransferMoney(input, HttpStatus.OK, TransferMoneyOutputModel.class);
+    O callPositive(I input) throws Exception {
+        return call(input, HttpStatus.OK, outputClass);
     }
 
-    ErrorDescription callTransferMoneyNegative(TransferInputModel input, HttpStatus status) throws Exception {
-        return callTransferMoney(input, status, ErrorDescription.class);
+    ErrorDescription callNegative(I input, HttpStatus status) throws Exception {
+        return call(input, status, ErrorDescription.class);
     }
 
-    private <T> T callTransferMoney(TransferInputModel input, HttpStatus status, Class<T> tClass) throws Exception {
+    private <T> T call(I input, HttpStatus status, Class<T> tClass) throws Exception {
         MvcResult result = mockMvc.perform(
-                post("/transferMoney")
+                post("/" + path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(MAPPER.writeValueAsString(input))
         )

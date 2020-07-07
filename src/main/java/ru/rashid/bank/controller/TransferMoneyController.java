@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.rashid.bank.data.model.input.TransferInputModel;
-import ru.rashid.bank.data.model.output.TransferMoneyOutputModel;
+import ru.rashid.bank.data.model.output.TransferOutputModel;
 import ru.rashid.bank.service.TransferMoneyService;
 import ru.rashid.bank.service.validation.TransferMoneyValidationService;
 
@@ -20,10 +20,10 @@ public class TransferMoneyController {
     private final TransferMoneyValidationService validationService;
 
     @PostMapping
-    public TransferMoneyOutputModel transferMoney(@Valid @RequestBody TransferInputModel input) {
+    public TransferOutputModel transferMoney(@Valid @RequestBody TransferInputModel input) {
         validationService.validateTransferMoney(input);
         var transferMoneyAccounts = transferMoneyService.transfer(input);
-        return new TransferMoneyOutputModel(transferMoneyAccounts);
+        return new TransferOutputModel(transferMoneyAccounts);
     }
 
 }
