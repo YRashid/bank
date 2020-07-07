@@ -21,9 +21,7 @@ public class TransferMoneyValidationService {
     private final AccountRepository accountRepository;
 
     /**
-     * Проверить, что
-     * сумма перевода задана и она не отрицательна
-     * аккаунты существуют и они разные
+     * Проверить, что аккаунты существуют и они разные
      */
     public void validateTransferMoney(TransferInputModel input) {
         checkAccountsIds(input);
