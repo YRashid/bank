@@ -2,7 +2,8 @@
 `mvn package`
 
 ### Запуск:  
-`java -jar bank-1.jar`
+`java -jar bank-1.jar`  
+Порт: 8080
 
 ### База:
 Файловая h2 в `${user.home}/database.mv.db` (inmemory для тестов)  
@@ -60,5 +61,5 @@
 Баланс пользователей 19 и 29 остался таким же, каким был до теста.
 
 ### Описание api
-Swagger доступен по адресу: `http://localhost:8080/swagger-ui.html#/`
+Swagger доступен по адресу: `http://localhost:8080/swagger-ui.html#/`  
 Порт: 8080
