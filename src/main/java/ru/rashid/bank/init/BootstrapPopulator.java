@@ -26,7 +26,7 @@ public class BootstrapPopulator {
         for (long i = 1; i <= 1000; i++) {
             Account account = new Account();
             account.setId(i);
-            account.setBalance(BigDecimal.valueOf(1000));
+            account.setBalance(BigDecimal.valueOf(100000));
             accounts.add(account);
         }
         accountRepository.saveAll(accounts);
