@@ -49,14 +49,14 @@
 #### Тест forward_and_backward_100_rps
 Выполнить в консоли:   
 `/.../apache-jmeter-5.3/bin/jmeter -n -t /.../bank/jmeter_test/forward_and_backward_100_rps.jmx`  
-Тест [forward_and_backward.jmx](https://github.com/YRashid/bank/blob/master/jmeter_test/forward_and_backward_100_rps.jmx) переводит с аккаунта 14 на аккаунт 24 и обратно. Баланс в итоге может отличаться от изначального, т.к. количество переводов в одну сторону может получиться больше чем в обратную.  
+Тест [forward_and_backward_100_rps.jmx](https://github.com/YRashid/bank/blob/master/jmeter_test/forward_and_backward_100_rps.jmx) переводит с аккаунта 14 на аккаунт 24 и обратно. Баланс в итоге может отличаться от изначального, т.к. количество переводов в одну сторону может получиться больше чем в обратную.  
 Тест дает нагрузку примерно 100 запросов в секунду в течении 60 секунд.  
 В итоге получим, что выполнено ~6066 запросов и 0% ошибок.  
 
 #### Тест forward_and_backward_balance_correctness
 Выполнить в консоли:   
 `/.../apache-jmeter-5.3/bin/jmeter -n -t /.../bank/jmeter_test/forward_and_backward_balance_correctness.jmx`  
-Тест [forward_and_backward.jmx](https://github.com/YRashid/bank/blob/master/jmeter_test/forward_and_backward_balance_correctness.jmx) переводит с аккаунта 19 на аккаунт 29 и обратно. Запускается 10000 запросов в одну сторону и 10000 запросов в другую.  
+Тест [forward_and_backward_balance_correctness.jmx](https://github.com/YRashid/bank/blob/master/jmeter_test/forward_and_backward_balance_correctness.jmx) переводит с аккаунта 19 на аккаунт 29 и обратно. Запускается 10000 запросов в одну сторону и 10000 запросов в другую.  
 В итоге получим, что выполнено 20000 запросов за ~18c. и 0% ошибок.
 Баланс пользователей 19 и 29 остался таким же, каким был до теста.
 

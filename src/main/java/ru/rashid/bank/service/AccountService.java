@@ -19,6 +19,7 @@ public class AccountService {
 
     @Transactional
     public Account createAccount(AccountInputModel input) {
+        //todo: catch unique constraint violation
         accountRepository.insert(input.getId(), input.getBalance());
         Account account = accountRepository.getOne(input.getId());
         log.info("New user {} with balance {} created", input.getId(), input.getBalance());
